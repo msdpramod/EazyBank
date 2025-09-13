@@ -3,6 +3,7 @@ package grioup.eazybank.config.ProjectSecurity;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.web.FormLoginDsl;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -24,8 +25,13 @@ public class ProjectSecurityConfig {
                "/myAccount","/myBalance","/myLoans").authenticated()
                .requestMatchers("/notices","/contact").permitAll()
        );
-        http.httpBasic(Customizer.withDefaults());
-         http.formLogin(Customizer.withDefaults());
+
+       http.formLogin(Customizer.withDefaults());
+       http.httpBasic(Customizer.withDefaults());
+        //http.httpBasic(Customizer.withDefaults());
+        // to remove the default login form
+//        http.formLogin(flc -> flc.disable());
+//        http.httpBasic(hbc -> hbc.disable());
         return http.build();
     }
 }
