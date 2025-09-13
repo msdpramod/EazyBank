@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.eazybank</groupId>
     <artifactId>EazyBank</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.1-SNAPSHOT</version>
     <name>EazyBank</name>
     <description>EazyBank</description>
     <url/>
