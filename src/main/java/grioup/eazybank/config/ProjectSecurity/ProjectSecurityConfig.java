@@ -12,6 +12,8 @@ import org.springframework.security.web.SecurityFilterChain;
 
 import javax.sql.DataSource;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
 @Configuration
 public class ProjectSecurityConfig {
 
@@ -26,13 +28,12 @@ public class ProjectSecurityConfig {
 
 
         // authenticate certain requests
-       http.authorizeHttpRequests(requests -> requests.requestMatchers(
-               "/myAccount","/myBalance","/myLoans","/myCards").authenticated()
-               .requestMatchers("/notices","/contact","/register").permitAll()
-       );
-
-       http.formLogin(Customizer.withDefaults());
-       http.httpBasic(Customizer.withDefaults());
+        http.csrf(csrfConfig -> csrfConfig.disable())
+                .authorizeHttpRequests((requests) -> requests
+                        .requestMatchers("/myAccount", "/myBalance", "/myLoans", "/myCards").authenticated()
+                        .requestMatchers("/notices", "/contact", "/error", "/register").permitAll());
+        http.formLogin(withDefaults());
+        http.httpBasic(withDefaults());
         //http.httpBasic(Customizer.withDefaults());
         // to remove the default login form
 //        http.formLogin(flc -> flc.disable());
